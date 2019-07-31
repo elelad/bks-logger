@@ -1,0 +1,7 @@
+{
+  "name": "bks-logger-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

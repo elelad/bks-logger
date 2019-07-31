@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      BKS logger
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-content>
+      <button color="light" ion-button (click)="debug()">debug</button><br>
+      <button color="secondary" ion-button (click)="info()">info</button><br>
+      <button color="primary" ion-button (click)="warn()">warn</button><br>
+      <button color="danger" ion-button (click)="error()">error</button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Setting
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Level</ion-label>
+        <ion-select [(ngModel)]="level" (ionChange)="setLevel()">
+          <ion-option value="ALL">ALL</ion-option>
+          <ion-option value="TRACE">TRACE</ion-option>
+          <ion-option value="DEBUG">DEBUG</ion-option>
+          <ion-option value="INFO">INFO</ion-option>
+          <ion-option value="WARN">WARN</ion-option>
+          <ion-option value="ERROR">ERROR</ion-option>
+          <ion-option value="FATAL">FATAL</ion-option>
+          <ion-option value="OFF">OFF</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Max Messages</ion-label>
+        <ion-select [(ngModel)]="maxMessagesToLogToFile" (ionChange)="setMaxMessages()">
+          <ion-option value="0">Default</ion-option>
+          <ion-option value="1">1</ion-option>
+          <ion-option value="5">5</ion-option>
+          <ion-option value="10">10</ion-option>
+          <ion-option value="20">20</ion-option>
+          <ion-option value="50">50</ion-option>
+          <ion-option value="250">250</ion-option>
+          <ion-option value="500">500</ion-option>
+          <ion-option value="1000">1000</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>Days to Save Files</ion-label>
+          <ion-select [(ngModel)]="daysToSaveFiles" (ionChange)="setDaysToSaveFiles()">
+            <ion-option value="3">3</ion-option>
+            <ion-option value="7">7</ion-option>
+            <ion-option value="14">14</ion-option>
+            <ion-option value="30">30</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

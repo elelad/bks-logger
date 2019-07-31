@@ -1,0 +1,202 @@
+{
+    "API": {
+        "login": "/auth/Login",
+        "logout": "/auth/Logout",
+        "refreshToken": "/auth/RefreshToken",
+        "getCourses": "/UserPortal/GetUserCourses",
+        "getManagedCourses": "/CourseSummary/GetCourseSummary",
+        "getLearningEvents": "/UserPortal/GetUserLearningEvents",
+        "getSchedule": "/UserPortal/GetUserEvents",
+        "getCourseKnowledgeBase": "/KnowledgeBase/GetCourseKnowledgeBase",
+        "uploadData": "/UserPortal/UploadData",
+        "getUserAchievements": "/UserAchievements/GetUserAchievements",
+        "getEventsExtraDetails": "/UserPortal/GetUserEventsExtraDetails",
+        "getEventExtraDetails": "/UserPortal/GetUserEventExtraDetails",
+        "getEventsForEvaluation": "/participantEvaluation/GetEventsForEvaluation",
+        "getParticipants": "/CourseParticipants/GetParticipants",
+        "getCourseSummary": "/CourseSummary/GetCourseSummary",
+        "getPermissionSets": "/Permissions/GetPermissionSets",
+        "getUserDetailsView": "/UserPortal/GetUserDetailsView",
+        "getSystemConfiguration": "/SystemSettings/GetFoxAppSystemSettings",
+        "getExamExecution": "/Exam/GetExamExecution",
+        "getExamBlockingContent": "/KnowledgeBase/GetExamBlockingContent",
+        "getUserPortalItems": "/PortalItem/GetUserPortalItems",
+        "getMainNavigationEntity": "/MainNavigationEntity/GetMainNavigationEntity",
+        "setRemoveFavoritesForUser": "/MainNavigationEntity/SetRemoveFavoritesForUser",
+        "getSideMenuHeader": "/SideMenuHeader/GetSideMenuHeader",
+        "getFavoritesForUser": "/MainNavigationEntity/GetFavoritesForUser",
+        "updateFavoriteOrder": "/MainNavigationEntity/UpdateFavoriteOrder",
+        "getTimeline": "/Timeline/GetTimeline",
+        "getAutoCompleteSearchResults": "/Search/Search",
+        "getAutoCompleteSearchResultsEntity": "/Search/SearchEntityType",
+        "getExamExecutionOnFromServer": "/UserPortal/GetUserExamExecution",
+        "updateExamMinutesRemaining": "/Exam/UpdateExamMinutesRemaining",
+        "submitExam": "/Exam/SubmitExam",
+        "saveQuestionAnswer": "/Exam/SaveQuestionAnswer",
+        "initializeOnlineExamExecution": "/Exam/InitializeOnlineExamExecution",
+        "getParticipantsByCourseId": "/CourseParticipants/GetParticipantsByCourseID",
+        "setEventSelfEvaluation": "/UserPortal/SetEventSelfEvaluation",
+        "foxLogin": "/auth/checkIfFoxLogedIn",
+        "getPasswordPolicy": "/auth/GetPasswordPolicy",
+        "setNewPassword": "/auth/SetNewPassword",
+        "confirmCurrentPassword": "/auth/ConfirmCurrentPassword",
+        "validatePasswordNotLoginName": "/auth/ValidatePasswordNotLoginName",
+        "getSwapTrainees": "/SwapTrainees/GetSwapTrainees",
+        "getSwapTraineeDetails": "/SwapTrainees/GetSwapTraineeDetails",
+        "swapTrainees": "/SwapTrainees/SwapTrainees",
+        "getAssessmentFormsData": "/AssessmentForm/GetAssessmentFormsData",
+        "getAssessmentFormsResponsesByDateRange": "/AssessmentForm/GetAssessmentFormsResponsesByDateRange"
+
+
+    },
+    "CustomerImages": {
+        "customerLoginLogo": "assets/imgs/customers/default/company_logo.png",
+        "customerLoginBackgroundLogo": "assets/imgs/customers/default/welcome.svg",
+        "customerLoginBackground": "assets/imgs/customers/default/login_image.jpg",
+        "customerBottomLogo": "assets/imgs/customers/default/powered_by_1.png",
+        "customerHeaderLogo": "assets/imgs/customers/default/headerLogo.png"
+    },
+    "SystemSettings": {
+        "baseAPI": "http://fox.bks/FoxNGApi/api",
+        "baseDomain": "http://fox.bks",
+        "iisVirtualDirectoryName": "",
+        "langDirection": "ltr",
+        "dateFormat": "MM/DD/YYYY",
+        "timeFormat": "HH:mm",
+        "downloadBackwardOfflineDays": "7",
+        "downloadForwardOfflineDays": "14",
+        "upcomingDays": "3",
+        "daysInChunk": 7,
+        "theme": "default",
+        "lang": "en",
+        "platformType": "",
+        "idleTimeout": 5000,
+        "idleTimeoutPeriod": 50,
+        "pingInterval": 15,
+        "powerSearchMenuItems": "null",
+        "modalMaxWidth": 768,
+        "splitPaneMaxWidth": 280,
+        "mainHelpUrl": "https://support.armytraininginformationsys.com/sdash.htm",
+        "syncTimeOutInSeconds": 45,
+        "syncDeltaTimeOutInSeconds": 5,
+        "syncRetry": 11
+    },
+    "StorageKeys": {
+        "systemConfiguration": "systemConfiguration",
+        "hasSeenFirstSettings": "hasSeenFirstSettings",
+        "token": "token",
+        "currentView": "currentView",
+        "userDetails": "userDetails",
+        "userDailyEvents": "userDailyEvents",
+        "userLearningEvents": "userLearningEvents",
+        "userCourses": "UserCourses",
+        "userAchievements": "userAchievements",
+        "eventsExtraDetails": "eventsExtraDetails",
+        "storedFiles": "storedFiles",
+        "currentCourse": "currentCourse",
+        "portalMenu": "portalMenu",
+        "courseMenu": "courseMenu",
+        "userPermissionSets": "userPermissionSets",
+        "courseSummary": "courseSummary",
+        "participantEvaluationEvents": "participantEvaluationEvents",
+        "courseParticipants": "courseParticipants",
+        "permissionSets": "permissionSets",
+        "courseSummaryModel": "courseSummaryModel",
+        "currentActiveMenu": "currentActiveMenu",
+        "navigationItem": "navigationItem",
+        "ssoRegularLogin": "ssoRegularLogin",
+        "examFlagedQuestions": "examFlagedQuestions",
+        "changePasswordPolicy": "changePasswordPolicy",
+        "assessmentFormsData":"assessmentFormsData",
+        "assessmentFormsResponses":"assessmentFormsResponses"
+    },
+    "ModalDialogs": {
+        "confirmSynchronization": "bks-synchronization-modal-component",
+        "synchronizationProcess": "bks-synchronization-modal-process-component"
+    },
+    "Pages": {
+        "login": "LoginPage",
+        "portal": "PortalPage"
+    },
+    "Component": {
+        "login": "LoginComponent"
+    },
+    "ConfigEvents": {
+        "authenticated": "authenticated",
+        "buildSideMenu": "buildMenu",
+        "buildMenuHeader": "buildMenuHeader",
+        "filterStatus": "filterStatus",
+        "toggleSearchPane": "toggleSearchPane",
+        "showElasticResults": "showElasticResults",
+        "logout": "logout",
+        "windowResized": "windowResized",
+        "navigateToEntity": "navigateToEntity",
+        "configurationLoaded": "configurationLoaded",
+        "buildCourseSummary": "buildCourseSummary",
+        "buildBreadcrumbs": "buildBreadcrumbs",
+        "updatePortalLayout": "updatePortalLayout",
+        "checkUrlParams": "checkUrlParams",
+        "authenticatedAndReady": "authenticatedAndReady",
+        "genericFilter": "genericFilter",
+        "generalFilterOpen": "generalFilterOpen",
+        "generalFilterClose": "generalFilterClose",
+        "breadCrumbsClick": "breadCrumbsClick",
+        "searchClick": "searchClick",
+        "extraDetailsLoaed": "extraDetailsLoaed",
+        "closeSearch": "closeSearch",
+        "buildCourseSummaryCompleted": "buildCourseSummaryCompleted",
+        "clickSideMenuItem": "clickSideMenuItem",
+        "toggleEvaluationMenu":"toggleEvaluationMenu"
+    },
+    "ConfigExamEvents": {
+        "closeExam": "closeExam",
+        "toggleMainAppMenu": "toggleMainAppMenu",
+        "openPage": "openPage",
+        "examStart": "examStart",
+        "previousQuestion": "previousQuestion",
+        "updateSyncBtn": "saveAndGoToNextQuestion",
+        "submitExam": "submitExam"
+    },
+    "logging": {
+        "logLevels": [
+            {
+                "loggerName": "FoxLogger_ALL",
+                "logLevel": "ALL"
+            },
+            {
+                "loggerName": "FoxLogger_DEBUG",
+                "logLevel": "DEBUG"
+            },
+            {
+                "loggerName": "FoxLogger_INFO",
+                "logLevel": "INFO"
+            },
+            {
+                "loggerName": "FoxLogger_WARN",
+                "logLevel": "WARN"
+            },
+            {
+                "loggerName": "FoxLogger_ERROR",
+                "logLevel": "ERROR"
+            },
+            {
+                "loggerName": "FoxLogger_OFF",
+                "logLevel": "OFF"
+            }
+        ],
+        "localStorageAppender": {
+            "localStorageKey": "FoxLogger_localStorageAppender",
+            "maxMessages": 1000,
+            "threshold": "INFO"
+        },
+        "browserConsoleAppender": {
+            "threshold": "INFO"
+        },
+        "ajaxAppender": {
+            "url": "/logger/writeLog",
+            "timerInterval": 0,
+            "batchSize": 1,
+            "threshold": "OFF"
+        }
+    }
+}

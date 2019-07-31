@@ -1,0 +1,19 @@
+page-home {
+
+    ion-card {
+        max-width: 300px;
+        position: relative;
+        top: 40px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    ion-card-content{
+        text-align: center;
+    }
+    
+    button {
+        min-width: 100px;
+    }
+
+}

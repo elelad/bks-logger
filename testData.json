@@ -1,0 +1,38 @@
+[
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-07-31T12:04:10.141Z"
+    },
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-07-31T12:04:10.675Z"
+    },
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-07-31T12:04:11.286Z"
+    },
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-07-31T12:04:12.925Z"
+    }
+]
