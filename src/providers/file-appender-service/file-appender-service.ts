@@ -11,7 +11,7 @@ export class BksFileAppenderService {
 
     constructor(private platform: Platform, private file: File) {
         //console.log(this.getTodyayFileName());
-        
+
     }
 
     getTargetLogDirPath() {
@@ -28,11 +28,13 @@ export class BksFileAppenderService {
 
         console.log(methodName);
 
+        this.removeOldFiles(2);
+
         try {
 
             const bksLogDirPath = this.getTargetLogDirPath();
             console.log(bksLogDirPath);
-            const isDirectoryExists = await this.file.checkDir(bksLogDirPath, "log").catch(e=>console.log(e));
+            const isDirectoryExists = await this.file.checkDir(bksLogDirPath, "log").catch(e => console.log(e));
             console.log('isDirectoryExists', isDirectoryExists);
             if (!isDirectoryExists) {
                 console.log('cca');
@@ -62,34 +64,44 @@ export class BksFileAppenderService {
         }
     }
 
-    getTodyayFileName(){
+    getTodyayFileName() {
         const now = new Date();
-        console.log(now);
-        return 'bksLog' + now.getDate() + now.getFullYear() + '.json';
+        return now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear() + '.json';
     }
 
     async writeToLogFile(logs) {
-        
+
         const methodName = "writeToLogFile";
         console.log(methodName)
 
         if (!logs) return;
 
         console.log(logs);
-        //try {
+        try {
             const dir = this.getTargetLogDirPath() + 'log/';
             const fileName = this.getTodyayFileName();
             //console.log( JSON.stringify(logs));
-            const fileExist = await this.file.checkFile(dir, fileName).catch(e=>console.log(e));
+            const fileExist = await this.file.checkFile(dir, fileName).catch(e => console.log(e));
             console.log('fileExist', fileExist);
-            if (fileExist){
-                this.file.writeFile(dir, fileName,  JSON.stringify(logs), {append: true});
-            }else{
-                this.file.writeFile(dir, fileName,  JSON.stringify(logs));
+            if (fileExist) {
+                this.file.writeFile(dir, fileName, JSON.stringify(logs), { append: true, replace: false }).then((fa) => {
+                    console.log(fa);
+                });
+            } else {
+                this.file.writeFile(dir, fileName, JSON.stringify(logs));
             }
-        /* }catch (e){
+        } catch (e) {
             console.log(e);
-        } */
+        }
+    }
+
+    removeOldFiles(maxFilesToSave){
+        const dir = this.getTargetLogDirPath();
+        this.file.listDir(dir, 'log').then(files=>{
+            console.log(files);
+            if (!files) return;
+            if (files.length <= maxFilesToSave) return;
+        }).catch(e => console.log(e));
     }
 
 }

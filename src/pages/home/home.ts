@@ -11,15 +11,14 @@ import { LogLevel } from 'ionic-logging-service';
 export class HomePage {
   public level: any = '0';
   public maxMessagesToLogToFile: number = 0;
-  public daysToSaveFiles: number = 3;
+  public maxFilesToSave: number = 3;
 
   constructor(public navCtrl: NavController, private loggerService : BksLoggerService, public bksConfigurationService: BksConfigurationService) {
-    console.log(this.bksConfigurationService.loggerLevel);
-    this.level = LogLevel[this.bksConfigurationService.loggerLevel];
+    
   }
 
   setLevel(){
-    this.bksConfigurationService.setLogLevel(this.level);
+    this.bksConfigurationService.setLogLevel(LogLevel[this.bksConfigurationService.loggerLevel]);
   }
 
   setMaxMessages(){
@@ -27,7 +26,8 @@ export class HomePage {
     this.bksConfigurationService.setMaxMessaggesForLocalstorageAppender();
   }
 
-  setDaysToSaveFiles(){
+  setMaxFilesToSave(){
+    console.log(this.bksConfigurationService.maxFilesToSave);
 
   }
 

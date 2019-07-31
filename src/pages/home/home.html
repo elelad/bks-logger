@@ -23,15 +23,15 @@
     <ion-card-content>
       <ion-item>
         <ion-label>Level</ion-label>
-        <ion-select [(ngModel)]="level" (ionChange)="setLevel()">
-          <ion-option value="ALL">ALL</ion-option>
-          <ion-option value="TRACE">TRACE</ion-option>
-          <ion-option value="DEBUG">DEBUG</ion-option>
-          <ion-option value="INFO">INFO</ion-option>
-          <ion-option value="WARN">WARN</ion-option>
-          <ion-option value="ERROR">ERROR</ion-option>
-          <ion-option value="FATAL">FATAL</ion-option>
-          <ion-option value="OFF">OFF</ion-option>
+        <ion-select [(ngModel)]="bksConfigurationService.loggerLevel" (ionChange)="setLevel()">
+          <ion-option value="0">ALL</ion-option>
+          <ion-option value="1">TRACE</ion-option>
+          <ion-option value="2">DEBUG</ion-option>
+          <ion-option value="3">INFO</ion-option>
+          <ion-option value="4">WARN</ion-option>
+          <ion-option value="5">ERROR</ion-option>
+          <ion-option value="6">FATAL</ion-option>
+          <ion-option value="7">OFF</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -50,7 +50,7 @@
       </ion-item>
       <ion-item>
           <ion-label>Days to Save Files</ion-label>
-          <ion-select [(ngModel)]="daysToSaveFiles" (ionChange)="setDaysToSaveFiles()">
+          <ion-select [(ngModel)]="bksConfigurationService.maxFilesToSave" (ionChange)="setMaxFilesToSave()">
             <ion-option value="3">3</ion-option>
             <ion-option value="7">7</ion-option>
             <ion-option value="14">14</ion-option>

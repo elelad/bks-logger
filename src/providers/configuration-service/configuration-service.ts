@@ -43,10 +43,18 @@ export class BksConfigurationService {
 
 	private _maxMessagesToLogToFile: number = 0;
 	public get maxMessagesToLogToFile(): number {
-		return this._loggerLevel;
+		return this._maxMessagesToLogToFile;
 	}
 	public set maxMessagesToLogToFile(value: number) {
-		this._loggerLevel = value;
+		this._maxMessagesToLogToFile = value;
+	}
+
+	private _maxFilesToSave: number = 3;
+	public get maxFilesToSave(): number {
+		return this._maxFilesToSave;
+	}
+	public set maxFilesToSave(value: number) {
+		this._maxFilesToSave = value;
 	}
 
 	component: Component;
@@ -204,15 +212,24 @@ export class BksConfigurationService {
 			const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
 			console.log(appenders);
 
-			const memoryAppender = appenders.find((a) => a.toString() === "Ionic.Logging.MemoryAppender") as MemoryAppender;
-			memoryAppender.setOnLogMessagesChangedCallback(this.onLogMessagesChanged.bind(this))
+			//const memoryAppender = appenders.find((a) => a.toString() === "Ionic.Logging.MemoryAppender") as MemoryAppender;
+			//memoryAppender.setOnLogMessagesChangedCallback(this.onLogMessagesChanged.bind(this));
+			this.loggingService.logMessagesChanged.subscribe(() => {
+				console.log(this.loggingService.getLogMessages());
+				this.onLogMessagesChanged();
+			})
 
-			if (this.systemSettings.platformType === PlatformType.Mobile || true) {
+			this.maxMessagesToLogToFile = this.loggerState.fileAppender.batchSize;
+
+			this.setMaxMessaggesForLocalstorageAppender();
+			this.resetLogsCounter();
+
+			if (this.systemSettings.platformType === PlatformType.Mobile) {
 				//#region Mobile (in mobile we work offline mode)
 				//let localStorageAppender = appenders.find((a) => a.toString() === "Ionic.Logging.LocalStorageAppender")
 				//if (localStorageAppender) {
 				// add appender
-				this.resatLogsCounter();
+				//this.resatLogsCounter();
 				const localStorageAppender = new LocalStorageAppender({
 					localStorageKey: this.loggerState.localStorageAppender.localStorageKey,
 					maxMessages: this.loggerState.fileAppender.batchSize,
@@ -266,7 +283,118 @@ export class BksConfigurationService {
 
 	}
 
-	async setLoggerOriginal(): Promise<boolean> {
+	
+
+	/**
+	 * Set Log level ALL | DEBUG | INFO | WARN | ERROR | OFF
+	 *
+	 * @param {string} threshold
+	 * @returns {Promise<boolean>}
+	 * @memberof BksConfigurationService
+	 */
+	async setLogLevel(threshold: string | number): Promise<boolean> {
+		
+
+		const methodName = "setLogLevel";
+		this.loggerLevel = LogLevel[threshold];
+		console.log('this.loggerLevel', this.loggerLevel);
+
+
+		try {
+
+			let loggerName = "FoxLogger_";
+			let logLevel: LogLevel;
+			switch (threshold) {
+				case "ALL":
+					logLevel = LogLevel.ALL;
+					loggerName += "ALL";
+					console.log(methodName, 'Log name ' + loggerName);
+					break;
+				case "DEBUG":
+					logLevel = LogLevel.DEBUG;
+					loggerName += "DEBUG";
+					console.log(methodName, 'Log name ' + loggerName);
+					break;
+				case "INFO":
+					logLevel = LogLevel.INFO;
+					loggerName += "INFO";
+					console.log(methodName, 'Log name ' + loggerName);
+					break;
+				case "WARN":
+					logLevel = LogLevel.WARN;
+					loggerName += "WARN";
+					console.log(methodName, 'Log name ' + loggerName);
+					break;
+				case "ERROR":
+					logLevel = LogLevel.ERROR;
+					loggerName += "ERROR";
+					console.log(methodName, 'Log name ' + loggerName + "ERROR");
+					break;
+				default:
+					logLevel = LogLevel.OFF;
+					loggerName + "OFF";
+					console.log(methodName, 'Log name ' + loggerName + "OFF");
+					break;
+			}
+			const logger = await this.loggingService.getLogger(loggerName);
+			logger.setLogLevel(logLevel);
+
+			console.log(methodName, 'Log level ' + logLevel);
+			this.loggerState.logger = logger;
+
+			return true;
+		}
+		catch (error) {
+			console.log(methodName, [error]);
+			return false
+		}
+	}
+
+	resetLogsCounter() {
+		const messages = JSON.parse(localStorage.getItem(this.loggerState.localStorageAppender.localStorageKey));
+		if (messages){
+			this.fileAppenderService.writeToLogFile(messages);
+			localStorage.removeItem(this.loggerState.localStorageAppender.localStorageKey);
+		}
+		this.logsCounter = 0;
+		console.log('this.logsCounter', this.logsCounter);
+	}
+
+	onLogMessagesChanged() {
+		this.logsCounter++;
+		console.log(this.maxMessagesToLogToFile);
+		const maxToLog = (this.maxMessagesToLogToFile == 0) ? this.loggerState.fileAppender.batchSize : this.maxMessagesToLogToFile;
+		if (this.logsCounter >= maxToLog) {
+			this.logsCounter = 0;
+			this.logToFile();
+		}
+	}
+
+	logToFile() {
+		const messages = this.loggingService.getLogMessages();
+		this.fileAppenderService.writeToLogFile(messages);
+	}
+
+	setMaxMessaggesForLocalstorageAppender() {
+		this.loggingService.configure({
+			localStorageAppender: {
+				localStorageKey: this.loggerState.localStorageAppender.localStorageKey,
+				maxMessages: this.maxMessagesToLogToFile,
+				threshold: this.loggerState.localStorageAppender.threshold
+			},
+			memoryAppender: {
+				maxMessages: this.maxMessagesToLogToFile,
+				threshold: this.loggerState.localStorageAppender.threshold
+			}
+		});
+	}
+
+
+}
+
+
+/* 
+async setLoggerOriginal(): Promise<boolean> {
 
 		const methodName = "setLogger";
 
@@ -329,109 +457,4 @@ export class BksConfigurationService {
 		}
 
 	}
-
-	/**
-	 * Set Log level ALL | DEBUG | INFO | WARN | ERROR | OFF
-	 *
-	 * @param {string} threshold
-	 * @returns {Promise<boolean>}
-	 * @memberof BksConfigurationService
-	 */
-	async setLogLevel(threshold: string): Promise<boolean> {
-
-		const methodName = "setLogLevel";
-		this.loggerLevel = LogLevel[threshold];
-		console.log('this.loggerLevel', this.loggerLevel);
-
-
-		try {
-
-			let loggerName = "FoxLogger_";
-			let logLevel: LogLevel;
-			switch (threshold) {
-				case "ALL":
-					logLevel = LogLevel.ALL;
-					loggerName += "ALL";
-					console.log(methodName, 'Log name ' + loggerName);
-					break;
-				case "DEBUG":
-					logLevel = LogLevel.DEBUG;
-					loggerName += "DEBUG";
-					console.log(methodName, 'Log name ' + loggerName);
-					break;
-				case "INFO":
-					logLevel = LogLevel.INFO;
-					loggerName += "INFO";
-					console.log(methodName, 'Log name ' + loggerName);
-					break;
-				case "WARN":
-					logLevel = LogLevel.WARN;
-					loggerName += "WARN";
-					console.log(methodName, 'Log name ' + loggerName);
-					break;
-				case "ERROR":
-					logLevel = LogLevel.ERROR;
-					loggerName += "ERROR";
-					console.log(methodName, 'Log name ' + loggerName + "ERROR");
-					break;
-				default:
-					logLevel = LogLevel.OFF;
-					loggerName + "OFF";
-					console.log(methodName, 'Log name ' + loggerName + "OFF");
-					break;
-			}
-			const logger = await this.loggingService.getLogger(loggerName);
-			logger.setLogLevel(logLevel);
-
-			console.log(methodName, 'Log level ' + logLevel);
-			this.loggerState.logger = logger;
-
-			return true;
-		}
-		catch (error) {
-			console.log(methodName, [error]);
-			return false
-		}
-	}
-
-	resatLogsCounter() {
-		this.logToFile(true);
-		this.logsCounter = 0;
-		console.log('this.logsCounter', this.logsCounter);
-	}
-
-	onLogMessagesChanged(msg) {
-		this.logsCounter++;
-		console.log(this.maxMessagesToLogToFile);
-		const maxToLog = (this.maxMessagesToLogToFile == 0) ? this.loggerState.fileAppender.batchSize : this.maxMessagesToLogToFile;
-		if (this.logsCounter >= maxToLog) {
-			setTimeout(() => { // event fires 
-				this.logsCounter = 0;
-				this.logToFile();
-			}, 1000)
-
-		}
-
-	}
-
-	logToFile(clear: boolean = true) {
-		const messages = JSON.parse(localStorage.getItem(this.loggerState.localStorageAppender.localStorageKey));
-		this.fileAppenderService.writeToLogFile(messages);
-		if (clear) {
-			localStorage.removeItem(this.loggerState.localStorageAppender.localStorageKey);
-		}
-	}
-
-	setMaxMessaggesForLocalstorageAppender() {
-		this.loggingService.configure({
-			localStorageAppender: {
-				localStorageKey: this.loggerState.localStorageAppender.localStorageKey,
-				maxMessages: this.maxMessagesToLogToFile,
-				threshold: this.loggerState.localStorageAppender.threshold
-			}
-		});
-		this.resatLogsCounter();
-	}
-
-
-}
+ */
