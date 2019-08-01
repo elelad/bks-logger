@@ -7,12 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-
+<div > <!-- *ngIf="platform.is('mobile')" -->
   <ion-card>
     <ion-card-content>
-      <button color="light" ion-button (click)="debug()">debug</button><br>
-      <button color="secondary" ion-button (click)="info()">info</button><br>
-      <button color="primary" ion-button (click)="warn()">warn</button><br>
+      <ion-item>
+        <ion-label fixed>Message</ion-label>
+        <ion-input type="text" [(ngModel)]="meassage"></ion-input>
+      </ion-item>
+      <br>
+      <button color="light" ion-button (click)="debug()">debug</button>
+      <button color="secondary" ion-button (click)="info()">info</button>
+      <button color="primary" ion-button (click)="warn()">warn</button>
       <button color="danger" ion-button (click)="error()">error</button>
     </ion-card-content>
   </ion-card>
@@ -49,15 +54,32 @@
         </ion-select>
       </ion-item>
       <ion-item>
-          <ion-label>Days to Save Files</ion-label>
-          <ion-select [(ngModel)]="bksConfigurationService.maxFilesToSave" (ionChange)="setMaxFilesToSave()">
-            <ion-option value="3">3</ion-option>
-            <ion-option value="7">7</ion-option>
-            <ion-option value="14">14</ion-option>
-            <ion-option value="30">30</ion-option>
-          </ion-select>
-        </ion-item>
+        <ion-label>Days to Save Files</ion-label>
+        <ion-select [(ngModel)]="bksConfigurationService.maxFilesToSave" (ionChange)="setMaxFilesToSave()">
+          <ion-option value="3">3</ion-option>
+          <ion-option value="7">7</ion-option>
+          <ion-option value="14">14</ion-option>
+          <ion-option value="30">30</ion-option>
+        </ion-select>
+      </ion-item>
     </ion-card-content>
+  </ion-card>
+</div>
+  <ion-card  *ngIf="platform.is('core')">
+    <ion-card-header>
+      <ion-item no-lines>
+        <h2>Logging Viewer</h2>
+        <input hidden #fl type="file" (change)="getFile($event)" />
+        <button item-end ion-button (click)="fl.click()">Browse</button>
+      </ion-item>
+    </ion-card-header>
+    <ion-toolbar>
+      <ionic-logging-viewer-search></ionic-logging-viewer-search>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ionic-logging-viewer-levels></ionic-logging-viewer-levels>
+    </ion-toolbar>
+    <ionic-logging-viewer [logMessages]="messagesFromFile"></ionic-logging-viewer>
   </ion-card>
 
 

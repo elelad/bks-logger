@@ -13,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { BksLoggerService } from '../providers/logger-service/logger-service';
 import { BksFileAppenderService } from '../providers/file-appender-service/file-appender-service';
 import { BksConfigurationService } from '../providers/configuration-service/configuration-service';
+import { LoggingViewerModule } from '../pages/viewer/logging-viewer.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BksConfigurationService } from '../providers/configuration-service/conf
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.DEBUG})
+    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.DEBUG}),
+    LoggingViewerModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

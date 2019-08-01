@@ -1,1 +1,182 @@
-"2019-07-31T13:29:29.322Z"
+[
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-08-01T09:01:19.558Z"
+    },
+    {
+        "level": "INFO",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "info log data"
+        ],
+        "methodName": "info",
+        "timeStamp": "2019-08-01T09:01:20.009Z"
+    },
+    {
+        "level": "WARN",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "warn log data"
+        ],
+        "methodName": "warn",
+        "timeStamp": "2019-08-01T09:01:20.539Z"
+    },
+    {
+        "level": "ERROR",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "error log data"
+        ],
+        "methodName": "error",
+        "timeStamp": "2019-08-01T09:01:21.194Z"
+    },
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-08-01T09:10:25.770Z"
+    },
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-08-01T09:10:26.713Z"
+    },
+    {
+        "level": "INFO",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "info log data"
+        ],
+        "methodName": "info",
+        "timeStamp": "2019-08-01T09:10:27.148Z"
+    },
+    {
+        "level": "INFO",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "info log data"
+        ],
+        "methodName": "info",
+        "timeStamp": "2019-08-01T09:10:29.393Z"
+    },
+    {
+        "level": "WARN",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "warn log data"
+        ],
+        "methodName": "warn",
+        "timeStamp": "2019-08-01T09:10:31.542Z"
+    },
+    {
+        "level": "ERROR",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "error log data"
+        ],
+        "methodName": "error",
+        "timeStamp": "2019-08-01T09:10:32.776Z"
+    },
+    {
+        "level": "WARN",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "warn log data"
+        ],
+        "methodName": "warn",
+        "timeStamp": "2019-08-01T09:10:33.212Z"
+    },
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-08-01T09:10:33.958Z"
+    },
+    {
+        "level": "INFO",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "info log data"
+        ],
+        "methodName": "info",
+        "timeStamp": "2019-08-01T09:10:34.439Z"
+    },
+    {
+        "level": "WARN",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "warn log data"
+        ],
+        "methodName": "warn",
+        "timeStamp": "2019-08-01T09:10:35.220Z"
+    },
+    {
+        "level": "ERROR",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "error log data"
+        ],
+        "methodName": "error",
+        "timeStamp": "2019-08-01T09:10:36.135Z"
+    },
+    {
+        "level": "WARN",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "warn log data"
+        ],
+        "methodName": "warn",
+        "timeStamp": "2019-08-01T09:10:36.737Z"
+    },
+    {
+        "level": "INFO",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "info log data"
+        ],
+        "methodName": "info",
+        "timeStamp": "2019-08-01T09:10:37.186Z"
+    },
+    {
+        "level": "DEBUG",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "debug log data"
+        ],
+        "methodName": "debug",
+        "timeStamp": "2019-08-01T09:10:37.957Z"
+    },
+    {
+        "level": "INFO",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "info log data"
+        ],
+        "methodName": "info",
+        "timeStamp": "2019-08-01T09:10:38.403Z"
+    },
+    {
+        "level": "WARN",
+        "logger": "FoxLogger_ALL",
+        "message": [
+            "warn log data"
+        ],
+        "methodName": "warn",
+        "timeStamp": "2019-08-01T09:10:39.035Z"
+    }
+]

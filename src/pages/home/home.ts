@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { BksLoggerService } from '../../providers/logger-service/logger-service';
 import { BksConfigurationService } from '../../providers/configuration-service/configuration-service';
 import { LogLevel } from 'ionic-logging-service';
+import { ToastController } from 'ionic-angular';
+import { LoggingViewerFilterService } from '../viewer/logging-viewer-filter.service';
 
 @Component({
   selector: 'page-home',
@@ -12,39 +14,77 @@ export class HomePage {
   public level: any = '0';
   public maxMessagesToLogToFile: number = 0;
   public maxFilesToSave: number = 3;
+  public messagesFromFile = [];
+  public meassage: string = 'log somthing';
 
-  constructor(public navCtrl: NavController, private loggerService : BksLoggerService, public bksConfigurationService: BksConfigurationService) {
-    
+  constructor(public navCtrl: NavController,
+    private loggerService: BksLoggerService,
+    public bksConfigurationService: BksConfigurationService,
+    private loggingViewerFilterService: LoggingViewerFilterService,
+    private toastCtrl: ToastController,
+    public platform: Platform) {
+
   }
 
-  setLevel(){
+  setLevel() {
     this.bksConfigurationService.setLogLevel(LogLevel[this.bksConfigurationService.loggerLevel]);
   }
 
-  setMaxMessages(){
+  setMaxMessages() {
     this.bksConfigurationService.maxMessagesToLogToFile = this.maxMessagesToLogToFile;
     this.bksConfigurationService.setMaxMessaggesForLocalstorageAppender();
   }
 
-  setMaxFilesToSave(){
+  setMaxFilesToSave() {
     console.log(this.bksConfigurationService.maxFilesToSave);
 
   }
 
-  warn(){
-    this.loggerService.logWarn('warn', ['warn log data']);
+  warn() {
+    this.loggerService.logWarn('warn', [this.meassage]);
   }
 
-  info(){
-    this.loggerService.logInfo('info', ['info log data']);
+  info() {
+    this.loggerService.logInfo('info', [this.meassage]);
   }
 
-  error(){
-    this.loggerService.logError('error', ['error log data']);
+  error() {
+    this.loggerService.logError('error', [this.meassage]);
   }
 
-  debug(){
-    this.loggerService.logDebug('debug', ['debug log data']);
+  debug() {
+    this.loggerService.logDebug('debug', [this.meassage]);
+  }
+
+  getFile(ev) {
+    const files: any[] = ev.target.files;
+    console.log(files);
+    let fReader = new FileReader();
+    fReader.onerror = (e) => { this.toast(e) }
+    for (let f of files) {
+      fReader.onload = (ev) => {
+        if (fReader.readyState === 2) {
+          const result: any = fReader.result;
+          try { this.messagesFromFile = this.messagesFromFile.concat(...JSON.parse(result)) }
+          catch (e) { this.toast(e) }
+        }
+        
+      }
+      fReader.onloadend = ()=>{
+        this.loggingViewerFilterService.filterChanged.emit();
+      }
+      fReader.readAsText(f);
+    }
+  }
+
+  toast(msg){
+    let t = this.toastCtrl.create({
+      message: msg,
+      duration: 3000
+    });
+    t.present();
+
+
   }
 
 }

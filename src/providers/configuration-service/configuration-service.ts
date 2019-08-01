@@ -99,7 +99,7 @@ export class BksConfigurationService {
 			ajaxAppender: {
 				url: "/logger/writeLog",
 				timerInterval: 0,
-				batchSize: 3,
+				batchSize: 15,
 				threshold: "ERROR"
 			},
 			fileAppender: {
@@ -210,44 +210,28 @@ export class BksConfigurationService {
 		try {
 
 			const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
-			console.log(appenders);
-
-			//const memoryAppender = appenders.find((a) => a.toString() === "Ionic.Logging.MemoryAppender") as MemoryAppender;
-			//memoryAppender.setOnLogMessagesChangedCallback(this.onLogMessagesChanged.bind(this));
-			this.loggingService.logMessagesChanged.subscribe(() => {
-				console.log(this.loggingService.getLogMessages());
-				this.onLogMessagesChanged();
-			})
+			//console.log(appenders);
 
 			this.maxMessagesToLogToFile = this.loggerState.fileAppender.batchSize;
 
 			this.setMaxMessaggesForLocalstorageAppender();
-			this.resetLogsCounter();
+
 
 			if (this.systemSettings.platformType === PlatformType.Mobile) {
-				//#region Mobile (in mobile we work offline mode)
-				//let localStorageAppender = appenders.find((a) => a.toString() === "Ionic.Logging.LocalStorageAppender")
-				//if (localStorageAppender) {
-				// add appender
-				//this.resatLogsCounter();
-				const localStorageAppender = new LocalStorageAppender({
+				//#region Mobile (in mobile we work offline mode) and we activate fileAppender
+
+				this.resetLogsCounter();
+				this.loggingService.logMessagesChanged.subscribe(() => this.onLogMessagesChanged());
+
+				const localStorageAppender = new LocalStorageAppender({ // TODO: active localstorage in desktop? 
 					localStorageKey: this.loggerState.localStorageAppender.localStorageKey,
-					maxMessages: this.loggerState.fileAppender.batchSize,
+					maxMessages: this.loggerState.fileAppender.batchSize, // => we want to save logs in localstorge for backup&restore in next seasson
 					threshold: this.loggerState.localStorageAppender.threshold
 				} as LocalStorageAppenderConfiguration);
+
 				this.loggingService.getRootLogger().getInternalLogger().addAppender(localStorageAppender);
 				this.setLogLevel(this.loggerState.localStorageAppender.threshold);
-				//}
-				//else {
-				/* const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender") as BrowserConsoleAppender;
-				if (browserConsoleAppender) {
-					this.loggingService.getRootLogger().getInternalLogger().addAppender(browserConsoleAppender);
-					this.setLogLevel(this.loggerState.browserConsoleAppender.threshold);
-				} */
-				//}
 
-
-				//#endregion
 			}
 			else {
 				//#region Browser
@@ -264,15 +248,7 @@ export class BksConfigurationService {
 				});
 				this.loggingService.getRootLogger().getInternalLogger().addAppender(ajaxAppender);
 				this.setLogLevel(this.loggerState.ajaxAppender.threshold)
-				//}
-				//else {
-				/* const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender") as BrowserConsoleAppender;
-				if (browserConsoleAppender) {
-					this.loggingService.getRootLogger().getInternalLogger().addAppender(browserConsoleAppender);
-					this.setLogLevel(this.loggerState.browserConsoleAppender.threshold);
-				} */
-				//}
-				//#endregion
+
 			}
 			return true
 		}
@@ -283,7 +259,7 @@ export class BksConfigurationService {
 
 	}
 
-	
+
 
 	/**
 	 * Set Log level ALL | DEBUG | INFO | WARN | ERROR | OFF
@@ -293,7 +269,7 @@ export class BksConfigurationService {
 	 * @memberof BksConfigurationService
 	 */
 	async setLogLevel(threshold: string | number): Promise<boolean> {
-		
+
 
 		const methodName = "setLogLevel";
 		this.loggerLevel = LogLevel[threshold];
@@ -352,7 +328,7 @@ export class BksConfigurationService {
 
 	resetLogsCounter() {
 		const messages = JSON.parse(localStorage.getItem(this.loggerState.localStorageAppender.localStorageKey));
-		if (messages){
+		if (messages) {
 			this.fileAppenderService.writeToLogFile(messages);
 			localStorage.removeItem(this.loggerState.localStorageAppender.localStorageKey);
 		}
@@ -387,13 +363,19 @@ export class BksConfigurationService {
 				threshold: this.loggerState.localStorageAppender.threshold
 			}
 		});
+		let ajaxAppender = new AjaxAppender({
+			batchSize: this.maxMessagesToLogToFile,
+			threshold: this.loggerState.ajaxAppender.threshold,
+			url: this.loggerState.ajaxAppender.url,
+			timerInterval: this.loggerState.ajaxAppender.timerInterval
+
+		});
+		this.loggingService.getRootLogger().getInternalLogger().addAppender(ajaxAppender);
 	}
-
-
 }
 
 
-/* 
+/*
 async setLoggerOriginal(): Promise<boolean> {
 
 		const methodName = "setLogger";
