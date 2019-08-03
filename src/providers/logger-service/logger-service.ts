@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Logger, LoggingService, LogLevel, AjaxAppender } from "ionic-logging-service";
 import { AjaxAppenderConfiguration } from 'ionic-logging-service/dist/ajax-appender.configuration';
 import { MemoryAppender } from 'ionic-logging-service/dist/memory-appender.model';
-import { LocalStorageAppender } from 'ionic-logging-service/dist/local-storage-appender.model';
+//import { LocalStorageAppender } from 'ionic-logging-service/dist/local-storage-appender.model';
 //import config from '../../assets/settings.json';
-import { LocalStorageAppenderConfiguration } from 'ionic-logging-service/dist/local-storage-appender.configuration';
-import { BrowserConsoleAppender } from 'log4javascript';
+//import { LocalStorageAppenderConfiguration } from 'ionic-logging-service/dist/local-storage-appender.configuration';
+//import { BrowserConsoleAppender } from 'log4javascript';
 import { Platform } from 'ionic-angular';
-import { PlatformType, SystemSettings } from '../configuration-service/custom-configuration.model';
+import { SystemSettings } from '../configuration-service/custom-configuration.model';
 import { BksFileAppenderService } from '../file-appender-service/file-appender-service';
 
 import { BksConfigurationService } from '../configuration-service/configuration-service';

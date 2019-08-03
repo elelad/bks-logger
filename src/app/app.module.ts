@@ -5,7 +5,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { File } from '@ionic-native/file';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { LoggingService } from 'ionic-logging-service';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -26,7 +25,6 @@ import { LoggingViewerModule } from '../pages/viewer/logging-viewer.module';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.DEBUG}),
     LoggingViewerModule,
   ],
   bootstrap: [IonicApp],

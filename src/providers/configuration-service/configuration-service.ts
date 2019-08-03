@@ -1,18 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-//import { TranslateService } from '@ngx-translate/core';
 import { Events, Platform } from 'ionic-angular';
-//import { ConfigurationService } from 'ionic-configuration-service';
 import { AjaxAppender, LoggingService, LogLevel } from 'ionic-logging-service';
 import { LocalStorageAppenderConfiguration } from 'ionic-logging-service/dist/local-storage-appender.configuration';
 import { LocalStorageAppender } from 'ionic-logging-service/dist/local-storage-appender.model';
-import { BrowserConsoleAppender } from 'log4javascript';
-import { MemoryAppender } from 'ionic-logging-service/dist/memory-appender.model';
-//import * as moment from 'moment';
-//import { ChangePasswordPolicy } from '../../components/change-password/change-password.model';
-//import { ExamFlagedQuestion } from '../../components/evaluations-tools/exam/examQuestionMenu/model/examFlagedQuestions';
-//import { BksLocalStorageService } from '../local-storage-service/local-storage-service';
-//import { BksNetworkService } from '../network-service/network-service';
 import { Component, LoggerState, PlatformType } from './custom-configuration.model'; //ConfigEvents, ConfigExamEvents, ConnectionStatus, CustomerImages, API, AuthenticationMode, StorageKeys, LoginType, ModalDialogs, Pages, SystemSettings
 import { BksFileAppenderService } from '../file-appender-service/file-appender-service';
 

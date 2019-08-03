@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { File, DirectoryEntry, Entry } from '@ionic-native/file';
+import { File, DirectoryEntry } from '@ionic-native/file';
 import { Platform, AlertController, ToastController } from "ionic-angular";
 import { SocialSharing } from '@ionic-native/social-sharing';
 

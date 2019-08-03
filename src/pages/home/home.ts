@@ -17,7 +17,6 @@ export class HomePage {
   public maxFilesToSave: number = 3;
   public messagesFromFile = [];
   public meassage: string = 'log something...';
-  private fileInputValue;
 
   constructor(public navCtrl: NavController,
     private loggerService: BksLoggerService,
