@@ -78,7 +78,6 @@ export class HomePage {
       }
       fReader.onloadend = ()=>{
         this.loggingViewerFilterService.filterChanged.emit();
-        this.fileInputValue = '';
       }
       fReader.readAsText(f);
     }
