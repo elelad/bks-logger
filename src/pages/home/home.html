@@ -6,81 +6,97 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<div > <!-- *ngIf="platform.is('mobile')" -->
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label fixed>Message</ion-label>
-        <ion-input type="text" [(ngModel)]="meassage"></ion-input>
-      </ion-item>
-      <br>
-      <button color="light" ion-button (click)="debug()">debug</button>
-      <button color="secondary" ion-button (click)="info()">info</button>
-      <button color="primary" ion-button (click)="warn()">warn</button>
-      <button color="danger" ion-button (click)="error()">error</button>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      Setting
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Level</ion-label>
-        <ion-select [(ngModel)]="bksConfigurationService.loggerLevel" (ionChange)="setLevel()">
-          <ion-option value="0">ALL</ion-option>
-          <ion-option value="1">TRACE</ion-option>
-          <ion-option value="2">DEBUG</ion-option>
-          <ion-option value="3">INFO</ion-option>
-          <ion-option value="4">WARN</ion-option>
-          <ion-option value="5">ERROR</ion-option>
-          <ion-option value="6">FATAL</ion-option>
-          <ion-option value="7">OFF</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Max Messages</ion-label>
-        <ion-select [(ngModel)]="maxMessagesToLogToFile" (ionChange)="setMaxMessages()">
-          <ion-option value="0">Default</ion-option>
-          <ion-option value="1">1</ion-option>
-          <ion-option value="5">5</ion-option>
-          <ion-option value="10">10</ion-option>
-          <ion-option value="20">20</ion-option>
-          <ion-option value="50">50</ion-option>
-          <ion-option value="250">250</ion-option>
-          <ion-option value="500">500</ion-option>
-          <ion-option value="1000">1000</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Days to Save Files</ion-label>
-        <ion-select [(ngModel)]="bksConfigurationService.maxFilesToSave" (ionChange)="setMaxFilesToSave()">
-          <ion-option value="3">3</ion-option>
-          <ion-option value="7">7</ion-option>
-          <ion-option value="14">14</ion-option>
-          <ion-option value="30">30</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-</div>
-  <ion-card  *ngIf="platform.is('core')">
-    <ion-card-header>
-      <ion-item no-lines>
-        <h2>Logging Viewer</h2>
-        <input hidden #fl type="file" (change)="getFile($event)" />
-        <button item-end ion-button (click)="fl.click()">Browse</button>
-      </ion-item>
-    </ion-card-header>
-    <ion-toolbar>
-      <ionic-logging-viewer-search></ionic-logging-viewer-search>
-    </ion-toolbar>
-    <ion-toolbar>
-      <ionic-logging-viewer-levels></ionic-logging-viewer-levels>
-    </ion-toolbar>
-    <ionic-logging-viewer [logMessages]="messagesFromFile"></ionic-logging-viewer>
-  </ion-card>
+<ion-content class="back">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-sm-12 col-md-6 col-xl-4>
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <ion-label fixed>Message</ion-label>
+              <ion-input type="text" [(ngModel)]="meassage"></ion-input>
+            </ion-item>
+            <br>
+            <button color="light" ion-button (click)="debug()" class="logBtn">debug</button>
+            <button color="secondary" ion-button (click)="info()" class="logBtn">info</button>
+            <button color="primary" ion-button (click)="warn()" class="logBtn">warn</button>
+            <button color="danger" ion-button (click)="error()" class="logBtn">error</button>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-header>
+            Setting
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>Level</ion-label>
+              <ion-select [(ngModel)]="bksConfigurationService.loggerLevel" (ionChange)="setLevel()">
+                <ion-option value="0">ALL</ion-option>
+                <ion-option value="1">TRACE</ion-option>
+                <ion-option value="2">DEBUG</ion-option>
+                <ion-option value="3">INFO</ion-option>
+                <ion-option value="4">WARN</ion-option>
+                <ion-option value="5">ERROR</ion-option>
+                <ion-option value="6">FATAL</ion-option>
+                <ion-option value="7">OFF</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Max Messages</ion-label>
+              <ion-select [(ngModel)]="maxMessagesToLogToFile" (ionChange)="setMaxMessages()">
+                <ion-option value="0">Default</ion-option>
+                <ion-option value="1">1</ion-option>
+                <ion-option value="5">5</ion-option>
+                <ion-option value="10">10</ion-option>
+                <ion-option value="20">20</ion-option>
+                <ion-option value="50">50</ion-option>
+                <ion-option value="250">250</ion-option>
+                <ion-option value="500">500</ion-option>
+                <ion-option value="1000">1000</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Days to Save Files</ion-label>
+              <ion-select [(ngModel)]="bksConfigurationService.maxFilesToSave" (ionChange)="setMaxFilesToSave()">
+                <ion-option value="3">3</ion-option>
+                <ion-option value="7">7</ion-option>
+                <ion-option value="14">14</ion-option>
+                <ion-option value="30">30</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item *ngIf="platform.is('ios') || platform.is('android')">
+              <ion-label>Send files</ion-label>
+              <button ion-button item-end (click)="bksFileAppenderService.chooseFileToSend()">
+                Share
+              </button>
+            </ion-item>
 
-
+          </ion-card-content>
+        </ion-card>
+        <!-- </div> -->
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <!-- *ngIf="platform.is('core')" -->
+          <ion-card-header>
+            <ion-item no-lines>
+              <h2>Logging Viewer</h2>
+              <input hidden #fl type="file" accept=".json" (change)="getFile($event)" />
+              <button item-end ion-button default (click)="fl.value = '';fl.click()">Browse</button>
+              <button item-end ion-button default clear icon-only color="danger" (click)="clearLogs()">
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-item>
+          </ion-card-header>
+          <ion-toolbar>
+            <ionic-logging-viewer-search></ionic-logging-viewer-search>
+          </ion-toolbar>
+          <ion-toolbar>
+            <ionic-logging-viewer-levels></ionic-logging-viewer-levels>
+          </ion-toolbar>
+          <ionic-logging-viewer [logMessages]="messagesFromFile"></ionic-logging-viewer>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

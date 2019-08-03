@@ -7,6 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { File } from '@ionic-native/file';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { LoggingService } from 'ionic-logging-service';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -40,6 +42,7 @@ import { LoggingViewerModule } from '../pages/viewer/logging-viewer.module';
     BksFileAppenderService,
     LoggingService,
     BksLoggerService,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

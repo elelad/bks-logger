@@ -5,6 +5,7 @@ import { BksConfigurationService } from '../../providers/configuration-service/c
 import { LogLevel } from 'ionic-logging-service';
 import { ToastController } from 'ionic-angular';
 import { LoggingViewerFilterService } from '../viewer/logging-viewer-filter.service';
+import { BksFileAppenderService } from '../../providers/file-appender-service/file-appender-service';
 
 @Component({
   selector: 'page-home',
@@ -15,14 +16,16 @@ export class HomePage {
   public maxMessagesToLogToFile: number = 0;
   public maxFilesToSave: number = 3;
   public messagesFromFile = [];
-  public meassage: string = 'log somthing';
+  public meassage: string = 'log something...';
+  private fileInputValue;
 
   constructor(public navCtrl: NavController,
     private loggerService: BksLoggerService,
     public bksConfigurationService: BksConfigurationService,
     private loggingViewerFilterService: LoggingViewerFilterService,
     private toastCtrl: ToastController,
-    public platform: Platform) {
+    public platform: Platform,
+    private bksFileAppenderService: BksFileAppenderService) {
 
   }
 
@@ -38,6 +41,10 @@ export class HomePage {
   setMaxFilesToSave() {
     console.log(this.bksConfigurationService.maxFilesToSave);
 
+  }
+
+  sendByMail(){
+    console.log('sendByMail');
   }
 
   warn() {
@@ -72,9 +79,16 @@ export class HomePage {
       }
       fReader.onloadend = ()=>{
         this.loggingViewerFilterService.filterChanged.emit();
+        this.fileInputValue = '';
       }
       fReader.readAsText(f);
     }
+  }
+
+  clearLogs(){
+    console.log('clearLogs')
+    this.messagesFromFile = [];
+    setTimeout(()=>{this.loggingViewerFilterService.filterChanged.emit()}, 20); 
   }
 
   toast(msg){
