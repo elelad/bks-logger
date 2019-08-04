@@ -13,7 +13,7 @@
         <ion-card>
           <ion-card-content>
             <ion-item>
-              <ion-label fixed>Message</ion-label>
+              <ion-label color="dark" fixed>Message</ion-label>
               <ion-input type="text" [(ngModel)]="meassage"></ion-input>
             </ion-item>
             <br>
@@ -29,7 +29,7 @@
           </ion-card-header>
           <ion-card-content>
             <ion-item>
-              <ion-label>Level</ion-label>
+              <ion-label color="dark">Level</ion-label>
               <ion-select [(ngModel)]="bksConfigurationService.loggerLevel" (ionChange)="setLevel()">
                 <ion-option value="0">ALL</ion-option>
                 <ion-option value="1">TRACE</ion-option>
@@ -42,7 +42,7 @@
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-label>Max Messages</ion-label>
+              <ion-label color="dark">Max Messages</ion-label>
               <ion-select [(ngModel)]="maxMessagesToLogToFile" (ionChange)="setMaxMessages()">
                 <ion-option value="0">Default</ion-option>
                 <ion-option value="1">1</ion-option>
@@ -56,7 +56,7 @@
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-label>Days to Save Files</ion-label>
+              <ion-label color="dark">Days to Save Files</ion-label>
               <ion-select [(ngModel)]="bksConfigurationService.maxFilesToSave" (ionChange)="setMaxFilesToSave()">
                 <ion-option value="3">3</ion-option>
                 <ion-option value="7">7</ion-option>
@@ -65,8 +65,8 @@
               </ion-select>
             </ion-item>
             <ion-item *ngIf="platform.is('ios') || platform.is('android')">
-              <ion-label>Send files</ion-label>
-              <button ion-button item-end (click)="bksFileAppenderService.chooseFileToSend()">
+              <ion-label color="dark">Send files</ion-label>
+              <button ion-button item-end default (click)="bksFileAppenderService.chooseFileToSend()">
                 Share
               </button>
             </ion-item>

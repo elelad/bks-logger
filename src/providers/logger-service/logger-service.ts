@@ -27,7 +27,7 @@ export class BksLoggerService {
 		
 	}
 
-	initConfig() {
+	/* initConfig() {
 		this.logger = this.loggingService.getLogger('BKS.FOX');
 		//this.loggerState = this.config.logging;
 		this.loggerState.logger = this.loggingService.getLogger('BKS.FOX');
@@ -50,11 +50,11 @@ export class BksLoggerService {
 		if (this.memoryAppender.getLogMessages().length > this.fileAppender.batchSize - 1){
 			this.fileAppenderService.writeToLogFile(this.memoryAppender.getLogMessages())
 		}
-	}
+	} */
 
-	setLogLevel(l: string) {
+	/* setLogLevel(l: string) {
 		this.bksConfigurationService.loggerState.logger.setLogLevel(LogLevel[l]);
-	}
+	} */
 
 	writeLog(methodName: string, params?: any[]) {
 

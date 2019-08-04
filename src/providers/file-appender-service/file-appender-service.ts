@@ -14,15 +14,13 @@ export class BksFileAppenderService {
         private socialSharing: SocialSharing,
         private alert: AlertController,
         private toast: ToastController) {
-        //console.log(this.getTodyayFileName());
+        
 
     }
 
     getTargetLogDirPath() {
         console.log('getTargetLogDirPath');
-        //console.log(this.file);
         if (this.platform.is('ios')) return this.file.dataDirectory;
-        //return this.file.dataDirectory;
         return this.file.externalDataDirectory;
     }
 
@@ -83,7 +81,6 @@ export class BksFileAppenderService {
         try {
             const dir = this.getTargetLogDirPath() + 'log/';
             const fileName = this.getTodyayFileName();
-            //console.log( JSON.stringify(logs));
             const fileExist = await this.file.checkFile(dir, fileName).catch(e => console.log(e));
             console.log('fileExist', fileExist);
             if (fileExist) {
